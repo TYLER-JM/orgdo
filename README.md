@@ -1,1 +1,1 @@
-This is the code for the first project of Udemy's React course. It will be deployed later.
+This is the code for the first project of Udemy's React course. This should one day become boilerplate.
