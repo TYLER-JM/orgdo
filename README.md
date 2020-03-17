@@ -1,1 +1,1 @@
-This is some basic Boiler plate for a react project. TEST
+This is some basic Boiler plate for a react project.
