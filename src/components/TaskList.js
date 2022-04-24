@@ -18,7 +18,11 @@ const TaskList = (props) => (
             onSubmit={(updates) => {props.editTask(task.id, updates)}}
           />
           :
-          <Task task={task} key={task.id}/>
+          <Task
+            task={task}
+            key={task.id}
+            onClick={(updates) => {props.editTask(task.id, updates)}}
+          />
         
       ))
     )

@@ -3,7 +3,7 @@ import React from 'react'
 const Task = (props) => {
   return (
     <div>
-      <span>{props.task.content}</span>
+      <span onClick={() => props.onClick({editing: true})}>{props.task.content}</span>
     </div>
   )
 }

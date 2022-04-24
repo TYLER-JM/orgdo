@@ -5,7 +5,6 @@ const TaskForm = (props) => {
   const [value, setValue] = useState(props.task.content)
   let onSubmit = (e) => {
     e.preventDefault();
-    console.log('TaskForm editing task')
     let updates = {
       content: value,
       editing: false
