@@ -5,3 +5,8 @@ export const editTask = (id, updates) => ({
   id,
   updates
 })
+
+export const addTask = (task) => ({
+  type: 'ADD_TASK',
+  task
+})

@@ -10,7 +10,6 @@ export default (state = taskDefaultState, action) => {
     case 'REMOVE_TASK':
       return state.filter(task => task.id !== action.id);
     case 'EDIT_TASK':
-      console.log('editing TASK')
       return state.map((task) => {
         if (task.id === action.id) {
           return {
