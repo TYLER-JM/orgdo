@@ -1,9 +1,10 @@
 import React from 'react'
+import { v4 as uuid } from 'uuid'
 
 const AddButton = (props) => {
   const newTask = {
     content: null,
-    id: 789,
+    id: uuid(),
     editing: true
   }
   return (
