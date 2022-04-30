@@ -2,7 +2,7 @@ import React from 'react';
 import TaskForm from './TaskForm';
 import Task from './Task';
 import { connect } from 'react-redux';
-import { editTask, addTask } from '../actions/tasks';
+import { editTask, addTask, removeTask } from '../actions/tasks';
 import AddButton from './AddButton';
 
 const TaskList = (props) => (
@@ -23,12 +23,13 @@ const TaskList = (props) => (
             task={task}
             key={task.id}
             onClick={(updates) => {props.editTask(task.id, updates)}}
+            removeTask={() => {props.removeTask(task.id)}}
           />
         
       ))
     )
   }
-  <AddButton addTask={(task) => {props.addTask(task)}} />
+  {props.tasks[props.tasks.length - 1].editing || <AddButton addTask={(task) => {props.addTask(task)}} />}
   </div>
 )
 
@@ -38,7 +39,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   editTask: (id, task) => dispatch(editTask(id, task)),
-  addTask: (task) => dispatch(addTask(task))
+  addTask: (task) => dispatch(addTask(task)),
+  removeTask: (task) => dispatch(removeTask(task))
 })
 
 // export default TaskList;
