@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
-
+/**
+ * DEPRECATED
+ */
 const TaskForm = (props) => {
   const [value, setValue] = useState(props.task.content)
   let onSubmit = (e) => {
