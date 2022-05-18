@@ -1,8 +1,6 @@
 import React from 'react';
 import TaskForm from './TaskForm';
 import Task from './Task';
-import { connect } from 'react-redux';
-import { editTask, addTask, removeTask } from '../actions/tasks';
 import AddButton from './AddButton';
 
 const TaskList = (props) => (
@@ -33,15 +31,4 @@ const TaskList = (props) => (
   </div>
 )
 
-const mapStateToProps = (state) => ({
-  tasks: state.tasks
-})
-
-const mapDispatchToProps = (dispatch) => ({
-  editTask: (id, task) => dispatch(editTask(id, task)),
-  addTask: (task) => dispatch(addTask(task)),
-  removeTask: (task) => dispatch(removeTask(task))
-})
-
-// export default TaskList;
-export default connect(mapStateToProps, mapDispatchToProps)(TaskList);
+export default TaskList;
