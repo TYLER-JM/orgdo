@@ -20,7 +20,8 @@ const Home = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-  tasks: state.tasks
+  // tasks: state.tasks
+  tasks: state.tasks.byId
 })
 
 const mapDispatchToProps = (dispatch) => ({

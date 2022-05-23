@@ -3,8 +3,10 @@ import { v4 as uuid } from 'uuid'
 
 const AddButton = (props) => {
   const newTask = {
-    content: null,
     id: uuid(),
+    parentTask: null,
+    childTasks: [],
+    content: null,
     editing: true
   }
   return (
