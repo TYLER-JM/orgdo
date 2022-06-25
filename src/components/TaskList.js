@@ -12,9 +12,9 @@ const TaskList = (props) => (
           <Task
             task={task}
             key={task.id}
-            editTask={(updates) => {props.editTask(task.id, updates)}}
-            addTask={(task) => {props.addTask(task)}}
-            removeTask={() => {props.removeTask(task.id)}}
+            editTask={(updates) => props.editTask(task.id, updates)}
+            addTask={(task) => props.addTask(task)}
+            removeTask={() => props.removeTask(task.id)}
           />
       ))
     )

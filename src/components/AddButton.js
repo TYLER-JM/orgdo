@@ -5,7 +5,7 @@ const AddButton = (props) => {
   const newTask = {
     id: uuid(),
     parentTask: null,
-    childTasks: [],
+    subtasks: [],
     content: null,
     editing: true
   }

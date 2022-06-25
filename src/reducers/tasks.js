@@ -1,27 +1,23 @@
-const taskDefaultState = [
-  {content: 'architect app', id: 123, editing: true},
-  {content: 'build out', id: 456, editing: false}
-]
 let normalizedState = {
   byId: [
 		{
 			id: 'task1',
 			parentTask: null,
-			childTasks: ['task1a'],
+			subtasks: ['task1a'],
       content: 'todo item 1',
-      editing: true
+      editing: false
 		},
 		{
 			id: 'task2',
 			parentTask: null,
-			childTasks: [],
+			subtasks: [],
       content: 'todo item 2',
-      editing: false
+      editing: true
 		},
 		{
 			id: 'task1a',
 			parentTask: 'task1',
-			childTasks: [],
+			subtasks: [],
       content: 'todo item 1a',
       editing: false
 		}
@@ -50,6 +46,7 @@ export default (state = normalizedState, action) => {
     case 'EDIT_TASK':
       return editTask(state, action)
     default:
+      console.log('action type: ', action.type)
       return state;
   }
 }
