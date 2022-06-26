@@ -4,7 +4,7 @@ import { v4 as uuid } from 'uuid'
 const AddButton = (props) => {
   const newTask = {
     id: uuid(),
-    parentTask: null,
+    parentTask: props.parentId || null,
     subtasks: [],
     content: null,
     editing: true

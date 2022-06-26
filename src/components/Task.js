@@ -1,9 +1,12 @@
 import React, { useState, Fragment } from 'react'
-import { connect, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import SubtaskList from './SubtaskList'
+import AddButton from './AddButton'
 
 const Task = (props) => {
   const [value, setValue] = useState(props.task.content)
+  let subtasks = useSelector(state => state.tasks.byId.filter(task => task.parentTask === props.task.id))
+  
   let onSubmit = (e) => {
     e.preventDefault();
     let updates = {
@@ -12,8 +15,9 @@ const Task = (props) => {
     }
     props.editTask(updates)
   }
+
   return (
-    <div>
+    <div className='task'>
     {
       (props.task.editing) ?
       <form onSubmit={onSubmit}>
@@ -27,20 +31,15 @@ const Task = (props) => {
       <Fragment>
         <button onClick={() => props.removeTask()}>X</button>
         <span onClick={() => props.editTask({editing: true})}>{props.task.content}</span>
-        {!!props.task.subtasks.length && <SubtaskList
-          tasks={useSelector(state => state.tasks.byId.filter(task => task.parentTask === props.task.id))}
-          editTask={(updates) => props.editTask(props.task.id, updates)}
-          addSubtask={(task) => props.addSubtask(props.task.id, task)}
-          removeSubtask={(taskId) => props.removeSubtask(props.task.id, taskId)}
-        />}
+        {!!props.task.subtasks.length ? 
+          <SubtaskList tasks={subtasks} parentId={props.task.id}/>
+          :
+          <AddButton parentId={props.task.id} addTask={(newTask) => props.addSubtask(newTask)}/>
+        }
       </Fragment>
     }
     </div>
   )
 }
-const mapDispatchToProps = (dispatch) => ({
-  addSubtask: (parentId, task) => dispatch(addSubtask(parentId, task)),
-  removeSubtask: (parentId, id) => dispatch(removeSubtask(parentId, id))
-})
 
-export default connect(null, mapDispatchToProps)(Task)
+export default Task
