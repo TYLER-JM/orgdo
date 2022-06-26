@@ -37,6 +37,19 @@ function editTask(state, action) {
   }
 }
 
+function addSubtask(state, action) {
+  let byId = state.byId.map(task => {
+    if (task.id === action.parentId) {
+      return {...task, subtasks: [...task.subtasks, action.task.id]}
+    }
+    return task
+  }) 
+  return {
+    byId: [...byId, action.task],
+    allIds: [...state.allIds, action.task.id]
+  }
+}
+
 export default (state = normalizedState, action) => {
   switch (action.type) {
     case 'ADD_TASK':
@@ -45,6 +58,8 @@ export default (state = normalizedState, action) => {
       return {byId: state.byId.filter(task => task.id !== action.id), allIds: state.allIds.filter(id => id !== action.id)};
     case 'EDIT_TASK':
       return editTask(state, action)
+    case 'ADD_SUB_TASK':
+      return addSubtask(state, action)
     default:
       console.log('action type: ', action.type)
       return state;
