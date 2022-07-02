@@ -50,16 +50,31 @@ function addSubtask(state, action) {
   }
 }
 
+function removeSubtask(state, action) {
+    let byIds = state.byId.map(task => {
+      if (task.id === action.parentId) {
+        return {...task, subtasks: task.subtasks.filter(id => id !== action.id)}
+      }
+      return task
+    })
+    return {
+      byId: byIds.filter(task => task.id !== action.id),
+      allIds: state.allIds.filter(id => !id === action.id)
+    }
+}
+
 export default (state = normalizedState, action) => {
   switch (action.type) {
     case 'ADD_TASK':
       return {byId: [...state.byId, action.task], allIds: [...state.allIds, action.task.id]}
     case 'REMOVE_TASK':
-      return {byId: state.byId.filter(task => task.id !== action.id), allIds: state.allIds.filter(id => id !== action.id)};
+      return {byId: state.byId.filter(task => !(task.id === action.id || task.parentTask === action.id)), allIds: state.allIds.filter(id => id !== action.id)};
     case 'EDIT_TASK':
       return editTask(state, action)
     case 'ADD_SUB_TASK':
       return addSubtask(state, action)
+    case 'REMOVE_SUB_TASK':
+      return removeSubtask(state, action)
     default:
       console.log('action type: ', action.type)
       return state;
