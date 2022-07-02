@@ -33,7 +33,7 @@ const TaskList = (props) => {
 const mapDispatchToProps = (dispatch) => ({
   editTask: (id, task) => dispatch(editTask(id, task)),
   addTask: (task) => dispatch(addTask(task)),
-  removeTask: (task) => dispatch(removeTask(task)),
+  removeTask: (id) => dispatch(removeTask(id)),
   addSubtask: (parentId, task) => dispatch(addSubtask(parentId, task))
 })
 
