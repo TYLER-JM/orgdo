@@ -9,7 +9,7 @@ import './styles/styles.scss';
 
 const store = configStore();
 
-console.log(store.getState());
+// console.log(store.getState());
 
 const jsx = (
   <Provider store={store}>
