@@ -13,7 +13,7 @@ const SubtaskList = (props) => (
           key={task.id}
           editTask={(updates) => {props.editTask(task.id, updates)}}
           addSubtask={(newTask) => {props.addSubtask(task.id, newTask)}}
-          removeTask={() => {props.removeSubtask(task.id)}}
+          removeTask={() => {props.removeSubtask(props.parentId, task.id)}}
         />
     )) 
   }
