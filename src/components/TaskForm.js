@@ -1,20 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react'
+import AddButton from './AddButton'
+
 
 /**
  * DEPRECATED
  */
 const TaskForm = (props) => {
-  const [value, setValue] = useState(props.task.content)
+  let [value, setValue] = useState('')
+  let [active, setActive] = useState(props.active)
   let onSubmit = (e) => {
     e.preventDefault();
     let updates = {
       content: value,
       editing: false
     }
-    props.onSubmit(updates)
+    console.log('SAVING: ', updates)
+    setActive(false)
+    // props.onSubmit(updates)
   }
   return (
-    <div>
+    <Fragment>
+    {
+      (active) ?
       <form onSubmit={onSubmit}>
         <input
           defaultValue={value}
@@ -22,7 +29,11 @@ const TaskForm = (props) => {
         />
         <button type="submit">SAVE</button>
       </form>
-    </div>
+      :
+      <button type="button" onClick={() => setActive(true)}>++</button>
+      // <AddButton/>
+    }  
+    </Fragment>
   )
 }
 

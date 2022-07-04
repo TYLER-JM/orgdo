@@ -2,6 +2,7 @@ import React, { useState, Fragment } from 'react'
 import { useSelector } from 'react-redux'
 import SubtaskList from './SubtaskList'
 import AddButton from './AddButton'
+import TaskForm from './TaskForm'
 
 const Task = (props) => {
   const [value, setValue] = useState(props.task.content)
@@ -35,7 +36,8 @@ const Task = (props) => {
         {!!props.task.subtasks.length ? 
           <SubtaskList tasks={subtasks} parentId={props.task.id}/>
           :
-          <AddButton parentId={props.task.id} addTask={(newTask) => props.addSubtask(newTask)}/>
+          <TaskForm active={false} />
+          // <AddButton parentId={props.task.id} addTask={(newTask) => props.addSubtask(newTask)}/>
         }
       </Fragment>
     }

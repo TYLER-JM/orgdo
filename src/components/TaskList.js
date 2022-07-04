@@ -1,8 +1,9 @@
-import React from 'react';
-import { connect, useSelector } from 'react-redux';
-import { editTask, addTask, removeTask, addSubtask } from '../actions/tasks';
-import Task from './Task';
-import AddButton from './AddButton';
+import React from 'react'
+import { connect, useSelector } from 'react-redux'
+import { editTask, addTask, removeTask, addSubtask } from '../actions/tasks'
+import Task from './Task'
+import TaskForm from './TaskForm'
+import AddButton from './AddButton'
 
 
 const TaskList = (props) => {
@@ -24,7 +25,8 @@ const TaskList = (props) => {
           ))
         )
       }
-      {(tasks.length && tasks[tasks.length - 1].editing) || <AddButton addTask={(task) => {props.addTask(task)}} />}
+      <TaskForm active={false} />
+      {/*(tasks.length && tasks[tasks.length - 1].editing) || <AddButton addTask={(task) => {props.addTask(task)}} />*/}
     </div>
   )
   
