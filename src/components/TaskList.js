@@ -24,7 +24,7 @@ const TaskList = (props) => {
           ))
         )
       }
-      {tasks[tasks.length - 1].editing || <AddButton addTask={(task) => {props.addTask(task)}} />}
+      {(tasks.length && tasks[tasks.length - 1].editing) || <AddButton addTask={(task) => {props.addTask(task)}} />}
     </div>
   )
   
