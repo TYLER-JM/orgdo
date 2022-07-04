@@ -22,6 +22,7 @@ const Task = (props) => {
       (props.task.editing) ?
       <form onSubmit={onSubmit}>
         <input
+          autoFocus
           defaultValue={value}
           onChange={(event) => setValue(event.target.value)}
         />
