@@ -33,7 +33,7 @@ function editTask(state, action) {
       }
       return task
     }),
-    allIds: [state.allIds]
+    allIds: state.allIds
   }
 }
 

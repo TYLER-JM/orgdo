@@ -3,6 +3,7 @@ import Task from './Task';
 import { connect } from 'react-redux';
 import { editTask, addSubtask, removeSubtask } from '../actions/tasks';
 import AddButton from './AddButton';
+import TaskForm from './TaskForm';
 
 const SubtaskList = (props) => (
   <div className='subtask-list'>
@@ -17,7 +18,9 @@ const SubtaskList = (props) => (
         />
     )) 
   }
-  {props.tasks[props.tasks.length - 1].editing || <AddButton addTask={(newTask) => {props.addSubtask(props.parentId, newTask)}} parentId={props.parentId} />}
+  <TaskForm active={false} parentId={props.parentId} onSubmit={(newTask) => props.addSubtask(props.parentId, newTask)}/>
+
+  {/*props.tasks[props.tasks.length - 1].editing || <AddButton addTask={(newTask) => {props.addSubtask(props.parentId, newTask)}} parentId={props.parentId} /> */}
   </div>
 )
 

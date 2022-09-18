@@ -1,22 +1,22 @@
 import React, { useState, Fragment } from 'react'
+import { v4 as uuid } from 'uuid'
+//AddButton not in use ATM
 import AddButton from './AddButton'
 
-
-/**
- * DEPRECATED
- */
 const TaskForm = (props) => {
   let [value, setValue] = useState('')
   let [active, setActive] = useState(props.active)
   let onSubmit = (e) => {
     e.preventDefault();
-    let updates = {
+    let task = {
+      id: uuid(),
       content: value,
-      editing: false
+      editing: false,
+      subtasks: [],
+      parentTask: props.parentId || null
     }
-    console.log('SAVING: ', updates)
+    props.onSubmit(task)
     setActive(false)
-    // props.onSubmit(updates)
   }
   return (
     <Fragment>

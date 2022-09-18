@@ -25,7 +25,7 @@ const TaskList = (props) => {
           ))
         )
       }
-      <TaskForm active={false} />
+      <TaskForm active={false} onSubmit={(newTask) => props.addTask(newTask)}/>
       {/*(tasks.length && tasks[tasks.length - 1].editing) || <AddButton addTask={(task) => {props.addTask(task)}} />*/}
     </div>
   )

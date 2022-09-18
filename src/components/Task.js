@@ -21,6 +21,7 @@ const Task = (props) => {
     <div className='task'>
     {
       (props.task.editing) ?
+      // <TaskForm active={true} parentId={props.task.parentId} onSubmit
       <form onSubmit={onSubmit}>
         <input
           autoFocus
@@ -36,7 +37,7 @@ const Task = (props) => {
         {!!props.task.subtasks.length ? 
           <SubtaskList tasks={subtasks} parentId={props.task.id}/>
           :
-          <TaskForm active={false} />
+          <TaskForm active={false} parentId={props.task.id} onSubmit={(newTask) => props.addSubtask(newTask)}/>
           // <AddButton parentId={props.task.id} addTask={(newTask) => props.addSubtask(newTask)}/>
         }
       </Fragment>
