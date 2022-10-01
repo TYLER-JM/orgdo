@@ -1,12 +1,26 @@
 import React from 'react';
+import { v4 as uuid } from 'uuid'
+
 import Task from './Task';
 import { connect } from 'react-redux';
 import { editTask, addSubtask, removeSubtask } from '../actions/tasks';
 import AddButton from './AddButton';
 import TaskForm from './TaskForm';
 
-const SubtaskList = (props) => (
-  <div className='subtask-list'>
+const SubtaskList = (props) => {
+
+  let createTask = (content) => {
+    let task = {
+      id: uuid(),
+      content,
+      subtasks: [],
+      parentTask: props.parentId
+    }
+    console.log('taskypoo SUBTASKLIST: ', task)
+    props.addSubtask(props.parentId, task)
+  }
+
+  return (<div className='subtask-list'>
   {
     props.tasks.map((task) => (        
         <Task
@@ -18,11 +32,11 @@ const SubtaskList = (props) => (
         />
     )) 
   }
-  <TaskForm active={false} parentId={props.parentId} onSubmit={(newTask) => props.addSubtask(props.parentId, newTask)}/>
+  <TaskForm active={false} parentId={props.parentId} onSubmit={(content) => createTask(content)}/>
 
   {/*props.tasks[props.tasks.length - 1].editing || <AddButton addTask={(newTask) => {props.addSubtask(props.parentId, newTask)}} parentId={props.parentId} /> */}
-  </div>
-)
+  </div>)
+}
 
 const mapDispatchToProps = (dispatch) => ({
   editTask: (id, task) => dispatch(editTask(id, task)),

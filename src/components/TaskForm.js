@@ -5,35 +5,33 @@ import AddButton from './AddButton'
 
 const TaskForm = (props) => {
   let [value, setValue] = useState('')
-  let [active, setActive] = useState(props.active)
+  // let [active, setActive] = useState(props.active)
   let onSubmit = (e) => {
     e.preventDefault();
-    let task = {
-      id: uuid(),
-      content: value,
-      editing: false,
-      subtasks: [],
-      parentTask: props.parentId || null
-    }
-    props.onSubmit(task)
-    setActive(false)
+    props.onSubmit(value)
+    // let task = {
+    //   id: uuid(),
+    //   content: value,
+    //   subtasks: [],
+    //   parentTask: props.parentId || null
+    // }
+    // props.onSubmit(task)
+    // setActive(false)
   }
+
   return (
     <Fragment>
-    {
-      (active) ?
       <form onSubmit={onSubmit}>
         <input
+          placeholder={props.placeholder}
           defaultValue={value}
           onChange={(event) => setValue(event.target.value)}
         />
         <button type="submit">SAVE</button>
       </form>
-      :
-      <button type="button" onClick={() => setActive(true)}>++</button>
-      // <AddButton/>
-    }  
     </Fragment>
+      // <button type="button" onClick={() => setActive(true)}>ADD</button>
+      // <AddButton/>
   )
 }
 
