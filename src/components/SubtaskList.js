@@ -7,7 +7,7 @@ import TaskForm from './TaskForm';
 
 const SubtaskList = (props) => {
 
-  return (<div className='subtask-list'>
+  return (<div className={`subtask-list ${ props.open ? '' : 'hidden' }`}>
   {
     props.tasks.map((task) => (        
         <Task

@@ -33,17 +33,17 @@ const Task = (props) => {
           </Fragment>
         }
         
-        {open && (!!props.task.subtasks.length ? 
-          <SubtaskList tasks={subtasks} parentId={props.task.id}/>
+        {!!props.task.subtasks.length ? 
+          <SubtaskList tasks={subtasks} parentId={props.task.id} open={open}/>
           :
-          <div className="subtask-list">
+          <div className={`subtask-list ${ open ? '' : 'hidden' }`}>
             <TaskForm
               placeholder="no subtasks"
               parentId={props.task.id}
               onSubmit={(newTask) => props.addSubtask(newTask)}
             />
           </div>
-        )}
+        }
     
     </div>
   )
