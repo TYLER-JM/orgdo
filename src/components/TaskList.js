@@ -1,25 +1,13 @@
 import React from 'react'
-import { v4 as uuid } from 'uuid'
 import { connect, useSelector } from 'react-redux'
 import { editTask, addTask, removeTask, addSubtask } from '../actions/tasks'
 import Task from './Task'
 import TaskForm from './TaskForm'
-import AddButton from './AddButton'
 
 
 const TaskList = (props) => {
   let tasks = useSelector(state => state.tasks.byId.filter(task => !task.parentTask))
 
-  let createTask = (content) => {
-    let task = {
-      id: uuid(),
-      content,
-      subtasks: [],
-      parentTask: null
-    }
-    console.log('taskypoo TASKLIST', task)
-    props.addTask(task)
-  }
   return (
     <div className='task-list'>
       {
@@ -37,8 +25,10 @@ const TaskList = (props) => {
           ))
         )
       }
-      <TaskForm active={false} onSubmit={(content) => createTask(content)}/>
-      {/*(tasks.length && tasks[tasks.length - 1].editing) || <AddButton addTask={(task) => {props.addTask(task)}} />*/}
+      <TaskForm
+        active={false}
+        onSubmit={(task) => props.addTask(task)}
+      />
     </div>
   )
   
