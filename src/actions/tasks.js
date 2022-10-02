@@ -10,9 +10,9 @@ export const addTask = (task) => ({
   task
 })
 
-export const removeTask = (id) => ({
+export const removeTask = (task) => ({
   type: 'REMOVE_TASK',
-  id
+  task
 })
 
 export const removeSubtask = (parentId, id) => ({

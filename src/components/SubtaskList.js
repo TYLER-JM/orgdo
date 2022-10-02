@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { editTask, addTask, removeSubtask } from '../actions/tasks';
+import { editTask, addTask, removeTask } from '../actions/tasks';
 
 import Task from './Task';
 import TaskForm from './TaskForm';
@@ -15,7 +15,7 @@ const SubtaskList = (props) => {
           key={task.id}
           editTask={(updates) => {props.editTask(task.id, updates)}}
           addTask={(newTask) => {props.addTask(newTask)}}
-          removeTask={() => {props.removeSubtask(props.parentId, task.id)}}
+          removeTask={() => {props.removeTask(task)}}
         />
     )) 
   }
@@ -30,7 +30,7 @@ const SubtaskList = (props) => {
 const mapDispatchToProps = (dispatch) => ({
   editTask: (id, task) => dispatch(editTask(id, task)),
   addTask: (task) => dispatch(addTask(task)),
-  removeSubtask: (parentId, id) => dispatch(removeSubtask(parentId, id))
+  removeTask: (task) => dispatch(removeTask(task))
 })
 
 export default connect(null, mapDispatchToProps)(SubtaskList)

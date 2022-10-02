@@ -5,7 +5,6 @@ import { editTask, addTask, removeTask } from '../actions/tasks'
 import Task from './Task'
 import TaskForm from './TaskForm'
 
-
 const TaskList = (props) => {
   let tasks = useSelector(state => state.tasks.byId.filter(task => !task.parentId))
 
@@ -21,7 +20,7 @@ const TaskList = (props) => {
                 key={task.id}
                 editTask={(updates) => props.editTask(task.id, updates)}
                 addTask={(newTask) => props.addTask(newTask)}
-                removeTask={() => props.removeTask(task.id)}
+                removeTask={() => props.removeTask(task)}
               />
           ))
         )
@@ -38,7 +37,7 @@ const TaskList = (props) => {
 const mapDispatchToProps = (dispatch) => ({
   editTask: (id, task) => dispatch(editTask(id, task)),
   addTask: (task) => dispatch(addTask(task)),
-  removeTask: (id) => dispatch(removeTask(id)),
+  removeTask: (task) => dispatch(removeTask(task)),
 })
 
 // export default TaskList;

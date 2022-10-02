@@ -47,16 +47,16 @@ function addTask(state, action) {
   }
 }
 
-function removeSubtask(state, action) {
+function removeTask(state, action) {
     let byIds = state.byId.map(task => {
-      if (task.id === action.parentId) {
-        return {...task, subtasks: task.subtasks.filter(id => id !== action.id)}
+      if (task.id === action.task.parentId) {
+        return {...task, subtasks: task.subtasks.filter(id => id !== action.task.id)}
       }
       return task
     })
     return {
-      byId: byIds.filter(task => task.id !== action.id),
-      allIds: state.allIds.filter(id => !id === action.id)
+      byId: byIds.filter(task => task.id !== action.task.id),
+      allIds: state.allIds.filter(id => !id === action.task.id)
     }
 }
 
@@ -65,11 +65,9 @@ export default (state = normalizedState, action) => {
     case 'ADD_TASK':
       return addTask(state, action)
     case 'REMOVE_TASK':
-      return {byId: state.byId.filter(task => !(task.id === action.id || task.parentId === action.id)), allIds: state.allIds.filter(id => id !== action.id)};
+      return removeTask(state, action)
     case 'EDIT_TASK':
       return editTask(state, action)
-    case 'REMOVE_SUB_TASK':
-      return removeSubtask(state, action)
     default:
       return state;
   }
