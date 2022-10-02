@@ -1,12 +1,13 @@
 import React from 'react'
 import { connect, useSelector } from 'react-redux'
-import { editTask, addTask, removeTask, addSubtask } from '../actions/tasks'
+import { editTask, addTask, removeTask } from '../actions/tasks'
+
 import Task from './Task'
 import TaskForm from './TaskForm'
 
 
 const TaskList = (props) => {
-  let tasks = useSelector(state => state.tasks.byId.filter(task => !task.parentTask))
+  let tasks = useSelector(state => state.tasks.byId.filter(task => !task.parentId))
 
   return (
     <div className='task-list'>
@@ -19,14 +20,14 @@ const TaskList = (props) => {
                 task={task}
                 key={task.id}
                 editTask={(updates) => props.editTask(task.id, updates)}
-                addSubtask={(newTask) => props.addSubtask(task.id, newTask)}
+                addTask={(newTask) => props.addTask(newTask)}
                 removeTask={() => props.removeTask(task.id)}
               />
           ))
         )
       }
       <TaskForm
-        active={false}
+        placeholder='root list task'
         onSubmit={(task) => props.addTask(task)}
       />
     </div>
@@ -38,7 +39,6 @@ const mapDispatchToProps = (dispatch) => ({
   editTask: (id, task) => dispatch(editTask(id, task)),
   addTask: (task) => dispatch(addTask(task)),
   removeTask: (id) => dispatch(removeTask(id)),
-  addSubtask: (parentId, task) => dispatch(addSubtask(parentId, task))
 })
 
 // export default TaskList;

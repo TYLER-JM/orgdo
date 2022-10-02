@@ -6,7 +6,7 @@ import TaskForm from './TaskForm'
 const Task = (props) => {
   const [editing, setEditing] = useState(false)
   const [open, setOpen] = useState(false)
-  let subtasks = useSelector(state => state.tasks.byId.filter(task => task.parentTask === props.task.id))
+  let subtasks = useSelector(state => state.tasks.byId.filter(task => task.parentId === props.task.id))
   
   let editTask = (content) => {
     let updates = {
@@ -40,7 +40,7 @@ const Task = (props) => {
             <TaskForm
               placeholder="no subtasks"
               parentId={props.task.id}
-              onSubmit={(newTask) => props.addSubtask(newTask)}
+              onSubmit={(newTask) => props.addTask(newTask)}
             />
           </div>
         }

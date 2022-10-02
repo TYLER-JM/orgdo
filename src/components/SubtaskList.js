@@ -1,8 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { editTask, addTask, removeSubtask } from '../actions/tasks';
 
 import Task from './Task';
-import { connect } from 'react-redux';
-import { editTask, addSubtask, removeSubtask } from '../actions/tasks';
 import TaskForm from './TaskForm';
 
 const SubtaskList = (props) => {
@@ -14,22 +14,22 @@ const SubtaskList = (props) => {
           task={task}
           key={task.id}
           editTask={(updates) => {props.editTask(task.id, updates)}}
-          addSubtask={(newTask) => {props.addSubtask(task.id, newTask)}}
+          addTask={(newTask) => {props.addTask(newTask)}}
           removeTask={() => {props.removeSubtask(props.parentId, task.id)}}
         />
     )) 
   }
   <TaskForm
-    active={false}
     parentId={props.parentId}
-    onSubmit={(newTask) => props.addSubtask(props.parentId, newTask)}
+    placeholder='not the first subtask'
+    onSubmit={(newTask) => props.addTask(newTask)}
   />
   </div>)
 }
 
 const mapDispatchToProps = (dispatch) => ({
   editTask: (id, task) => dispatch(editTask(id, task)),
-  addSubtask: (parentId, task) => dispatch(addSubtask(parentId, task)),
+  addTask: (task) => dispatch(addTask(task)),
   removeSubtask: (parentId, id) => dispatch(removeSubtask(parentId, id))
 })
 

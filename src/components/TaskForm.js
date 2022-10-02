@@ -15,7 +15,7 @@ const TaskForm = (props) => {
         id: uuid(),
         content: value,
         subtasks: [],
-        parentTask: props.parentId || null
+        parentId: props.parentId || null
       }
       props.onSubmit(task)
     }
