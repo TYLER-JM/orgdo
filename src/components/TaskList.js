@@ -1,20 +1,19 @@
 import React from 'react'
-import { connect, useSelector } from 'react-redux'
+import { connect } from 'react-redux'
 import { editTask, addTask, removeTask } from '../actions/tasks'
 
 import Task from './Task'
 import TaskForm from './TaskForm'
 
 const TaskList = (props) => {
-  let tasks = useSelector(state => state.tasks.byId.filter(task => !task.parentId))
 
   return (
     <div className='task-list'>
       {
-        tasks.length === 0 ? (
+        props.tasks.length === 0 ? (
           <p>No tasks</p>
         ) : (
-          tasks.map((task) => (        
+          props.tasks.map((task) => (        
               <Task
                 task={task}
                 key={task.id}
@@ -40,5 +39,12 @@ const mapDispatchToProps = (dispatch) => ({
   removeTask: (task) => dispatch(removeTask(task)),
 })
 
+const mapStateToProps = (state) => {
+  let rootTasks = Object.entries(state.tasks.byId)
+    .filter(([,value]) => value.parentId === null)
+    .map(([,value]) => value)
+  return {tasks: rootTasks}
+}
+
 // export default TaskList;
-export default connect(null, mapDispatchToProps)(TaskList);
+export default connect(mapStateToProps, mapDispatchToProps)(TaskList);
