@@ -6,7 +6,11 @@ import TaskForm from './TaskForm'
 const Task = (props) => {
   const [editing, setEditing] = useState(false)
   const [open, setOpen] = useState(false)
-  let subtasks = useSelector(state => state.tasks.byId.filter(task => task.parentId === props.task.id))
+  let subtasks = useSelector(state => {
+    return Object.entries(state.tasks.byId)
+      .filter(([,value]) => value.parentId === props.task.id)
+      .map(([,value]) => value)
+  })
   
   let editTask = (content) => {
     let updates = {
