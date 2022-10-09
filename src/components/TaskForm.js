@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState } from 'react'
 import { v4 as uuid } from 'uuid'
 
 const TaskForm = (props) => {
@@ -24,7 +24,6 @@ const TaskForm = (props) => {
   }
 
   return (
-    <Fragment>
       <form onSubmit={onSubmit}>
         <input
           placeholder={props.placeholder}
@@ -33,9 +32,8 @@ const TaskForm = (props) => {
           autoFocus
           onBlur={props.onBlur}
         />
-        <button type="submit">SAVE</button>
+        <button type="submit" onMouseDown={onSubmit}>SAVE</button>
       </form>
-    </Fragment>
   )
 }
 
