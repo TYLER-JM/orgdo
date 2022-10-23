@@ -44,16 +44,36 @@ function addTask(state, action) {
 }
 
 function removeTask(state, action) {
-    // let byIds = state.byId.map(task => {
-    //   if (task.id === action.task.parentId) {
-    //     return {...task, subtasks: task.subtasks.filter(id => id !== action.task.id)}
-    //   }
-    //   return task
-    // })
-    // return {
-    //   byId: byIds.filter(task => task.id !== action.task.id),
-    //   allIds: state.allIds.filter(id => !id === action.task.id)
-    // }
+
+  //remove the task ID from the subtasks array of it's Parent Task
+  let byId = null
+  if (action.task.parentId) {
+    byId = {
+      ...state.byId,
+      [action.task.parentId]: {
+        ...state.byId[action.task.parentId],
+        subtasks: state.byId[action.task.parentId].subtasks.filter(id => id !== action.task.id)
+      }
+    }
+  }
+  let filteredState = {
+    byId: byId || {...state.byId},
+    allIds: [...state.allIds]
+  }
+
+  // recursively remove all subtasks
+  removeSubtasks(filteredState, action.task.id)
+
+  return filteredState
+}
+
+function removeSubtasks(filteredState, taskId) {
+  filteredState.byId[taskId].subtasks.forEach(id => {
+    removeSubtasks(filteredState, id)
+  });
+
+  delete filteredState.byId[taskId]
+  filteredState.allIds = filteredState.allIds.filter(id => id !== taskId)
 }
 
 export default (state = normalizedState, action) => {
