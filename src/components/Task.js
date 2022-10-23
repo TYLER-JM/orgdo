@@ -11,23 +11,17 @@ const Task = (props) => {
       .filter(([,value]) => value.parentId === props.task.id)
       .map(([,value]) => value)
   })
-  
-  let editTask = (content) => {
-    let updates = {
-      content,
-    }
-    setEditing(false)
-    props.editTask(updates)
-  }
 
   return (
     <div className='task'>
     
         {editing ? 
           <TaskForm
+            taskId={props.task.id}
+            taskSubtasks={props.task.subtasks}
             content={props.task.content}
             parentId={props.task.parentId}
-            onSubmit={(content) => editTask(content)}
+            onSubmit={(updates) => props.editTask(updates)}
             onBlur={() => setEditing(false)}
           /> :
           <Fragment>

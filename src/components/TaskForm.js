@@ -8,19 +8,17 @@ const TaskForm = (props) => {
   let onSubmit = (e) => {
     e.preventDefault();
 
-    if (props.content) {
-      props.onSubmit(value)
-    } else {
-      let task = {
-        id: uuid(),
-        content: value,
-        subtasks: [],
-        parentId: props.parentId || null
-      }
-      props.onSubmit(task)
+    let task = {
+      id: props.taskId || uuid(),
+      content: value,
+      subtasks: props.taskSubtasks || [],
+      parentId: props.parentId || null
     }
+    
+    props.onSubmit(task)
     e.target.reset()
     setValue('')
+    props.onBlur && props.onBlur() 
   }
 
   return (
@@ -32,7 +30,6 @@ const TaskForm = (props) => {
           autoFocus
           onBlur={props.onBlur}
         />
-        <button type="submit" onMouseDown={onSubmit}>SAVE</button>
       </form>
   )
 }
