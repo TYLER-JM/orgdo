@@ -7,12 +7,13 @@ const TaskForm = (props) => {
 
   let onSubmit = (e) => {
     e.preventDefault();
-
+    console.log('event', e)
     let task = {
       id: props.taskId || uuid(),
       content: value,
       subtasks: props.taskSubtasks || [],
-      parentId: props.parentId || null
+      parentId: props.parentId || null,
+      open: false // this will need to be conditional
     }
     
     props.onSubmit(task)

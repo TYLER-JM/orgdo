@@ -5,18 +5,21 @@ let normalizedState = {
 			parentId: null,
 			subtasks: ['task1a'],
       content: 'todo item 1',
+      open: true
 		},
 		'task2': {
 			id: 'task2',
 			parentId: null,
 			subtasks: [],
       content: 'todo item 2',
+      open: false
 		},
 		'task1a': {
 			id: 'task1a',
 			parentId: 'task1',
 			subtasks: [],
       content: 'todo item 1a',
+      open: false
 		}
 },
 	allIds: ['task1', 'task2', 'task1a']

@@ -5,12 +5,17 @@ import TaskForm from './TaskForm'
 
 const Task = (props) => {
   const [editing, setEditing] = useState(false)
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(props.task.open)
   let subtasks = useSelector(state => {
     return Object.entries(state.tasks.byId)
       .filter(([,value]) => value.parentId === props.task.id)
       .map(([,value]) => value)
   })
+
+  function toggleOpen() {
+    props.editTask({open: !open})
+    setOpen(!open)
+  }
 
   return (
     <div className='task'>
@@ -25,7 +30,7 @@ const Task = (props) => {
             onBlur={() => setEditing(false)}
           /> :
           <Fragment>
-            <button onClick={() => setOpen(!open)}>{open ? '-' : '+'}</button>
+            <button onClick={toggleOpen}>{open ? '-' : '+'}</button>
             <span onClick={() => setEditing(true)}>{props.task.content}</span>
             <button onClick={() => props.removeTask()}>X</button>
           </Fragment>
