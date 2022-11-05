@@ -5,17 +5,11 @@ import TaskForm from './TaskForm'
 
 const Task = (props) => {
   const [editing, setEditing] = useState(false)
-  const [open, setOpen] = useState(props.task.open)
   let subtasks = useSelector(state => {
     return Object.entries(state.tasks.byId)
       .filter(([,value]) => value.parentId === props.task.id)
       .map(([,value]) => value)
   })
-
-  function toggleOpen() {
-    props.editTask({open: !open})
-    setOpen(!open)
-  }
 
   return (
     <div className='task'>
@@ -30,16 +24,16 @@ const Task = (props) => {
             onBlur={() => setEditing(false)}
           /> :
           <Fragment>
-            <button onClick={toggleOpen}>{open ? '-' : '+'}</button>
+            <button onClick={() => props.editTask({open: !props.task.open})}>{props.task.open ? '-' : '+'}</button>
             <span onClick={() => setEditing(true)}>{props.task.content}</span>
             <button onClick={() => props.removeTask()}>X</button>
           </Fragment>
         }
         
         {!!props.task.subtasks.length ? 
-          <SubtaskList tasks={subtasks} parentId={props.task.id} open={open}/>
+          <SubtaskList tasks={subtasks} parentId={props.task.id} open={props.task.open}/>
           :
-          <div className={`subtask-list ${ open ? '' : 'hidden' }`}>
+          <div className={`subtask-list ${ props.task.open ? '' : 'hidden' }`}>
             <TaskForm
               placeholder="no subtasks"
               parentId={props.task.id}
