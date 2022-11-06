@@ -3,6 +3,11 @@ import { v4 as uuid } from 'uuid'
 
 const TaskForm = (props) => {
   let [value, setValue] = useState(props.content || '')
+  let [shiftPressed, setShiftPressed] = useState(false)
+
+  // function checkShiftPress(event) {
+  //   set
+  // }
 
 
   let onSubmit = (e) => {
@@ -13,7 +18,7 @@ const TaskForm = (props) => {
       content: value,
       subtasks: props.taskSubtasks || [],
       parentId: props.parentId || null,
-      open: false // this will need to be conditional
+      open: shiftPressed // this will need to be conditional
     }
     
     props.onSubmit(task)
@@ -23,12 +28,12 @@ const TaskForm = (props) => {
   }
 
   return (
-      <form onSubmit={onSubmit}>
+      <form onKeyDown={(event) => setShiftPressed(event.shiftKey)} onSubmit={onSubmit}>
         <input
           placeholder={props.placeholder}
           defaultValue={value}
           onChange={(event) => setValue(event.target.value)}
-          autoFocus
+          autoFocus={props.shouldFocus}
           onBlur={props.onBlur}
         />
       </form>

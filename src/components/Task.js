@@ -12,7 +12,7 @@ const Task = (props) => {
   })
 
   return (
-    <div className='task'>
+    <div className='task' onKeyDown={(event) => console.log(event.shiftKey)}>
     
         {editing ? 
           <TaskForm
@@ -38,6 +38,7 @@ const Task = (props) => {
               placeholder="no subtasks"
               parentId={props.task.id}
               onSubmit={(newTask) => props.addTask(newTask)}
+              shouldFocus={true}
             />
           </div>
         }
