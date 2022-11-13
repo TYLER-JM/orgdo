@@ -30,19 +30,14 @@ const Task = (props) => {
           </Fragment>
         }
         
-        {!!props.task.subtasks.length ? 
-          <SubtaskList tasks={subtasks} parentId={props.task.id} open={props.task.open}/>
-          :
-          <div className={`subtask-list ${ props.task.open ? '' : 'hidden' }`}>
-            <TaskForm
-              placeholder="no subtasks"
-              parentId={props.task.id}
-              onSubmit={(newTask) => props.addTask(newTask)}
-              shouldFocus={true}
-            />
-          </div>
-        }
-    
+        {!!props.task.subtasks.length && <SubtaskList tasks={subtasks} parentId={props.task.id} open={props.task.open}/>}
+      <div className={`subtask-list ${ props.task.open ? '' : 'hidden' }`}>
+        <TaskForm
+          placeholder="subtasks"
+          parentId={props.task.id}
+          onSubmit={(newTask) => props.addTask(newTask)}
+        />
+      </div>
     </div>
   )
 }

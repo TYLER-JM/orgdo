@@ -5,20 +5,14 @@ const TaskForm = (props) => {
   let [value, setValue] = useState(props.content || '')
   let [shiftPressed, setShiftPressed] = useState(false)
 
-  // function checkShiftPress(event) {
-  //   set
-  // }
-
-
   let onSubmit = (e) => {
     e.preventDefault();
-    console.log('event', e)
     let task = {
       id: props.taskId || uuid(),
       content: value,
       subtasks: props.taskSubtasks || [],
       parentId: props.parentId || null,
-      open: shiftPressed // this will need to be conditional
+      open: shiftPressed
     }
     
     props.onSubmit(task)
@@ -33,7 +27,7 @@ const TaskForm = (props) => {
           placeholder={props.placeholder}
           defaultValue={value}
           onChange={(event) => setValue(event.target.value)}
-          autoFocus={props.shouldFocus}
+          autoFocus
           onBlur={props.onBlur}
         />
       </form>

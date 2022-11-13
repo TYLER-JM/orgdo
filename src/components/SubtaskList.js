@@ -19,12 +19,6 @@ const SubtaskList = (props) => {
         />
     )) 
   }
-  <TaskForm
-    parentId={props.parentId}
-    placeholder='not the first subtask'
-    onSubmit={(newTask) => props.addTask(newTask)}
-    shouldFocus={false}
-  />
   </div>)
 }
 
